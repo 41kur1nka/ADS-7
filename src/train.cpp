@@ -5,10 +5,10 @@ Train::Train() : first(nullptr), countOp(0) {}
 
 Train::~Train() {
   if (!first) return;
-  Car* cur = first->next;
+  Car* cur = cur->next;
   while (cur != first) {
     const Car* toDel = cur;
-    const cur = first->next;
+    const cur = cur->next;
     delete toDel;
   }
   delete first;
