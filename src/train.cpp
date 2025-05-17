@@ -58,20 +58,16 @@ std::size_t Train::getLength() {
     first->light = !first->light;
     return len;
   } else {
-    const Car* cur = first;
-    std::size_t k = 0;
-    while (true) {
-      ++k;
-      for (std::size_t i = 0; i < k; ++i) {
-        cur = cur->next;
-        ++countOp;
-      }
-      for (std::size_t i = 0; i < k; ++i) {
-        cur = cur->prev;
-        ++countOp;
-      }
-      if (cur == first) return k;
-    }
+    const Car* cur = first->next;
+++countOp;
+std::size_t len = 1;
+while (cur != first) {
+  cur = cur->next;
+  ++countOp;
+  ++len;
+}
+countOp += len * len;
+return len;
   }
 }
 
