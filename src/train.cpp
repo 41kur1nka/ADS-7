@@ -7,8 +7,8 @@ Train::~Train() {
   if (!first) return;
   Car* cur = first->next;
   while (cur != first) {
-    Car* toDel = cur;
-    cur = cur->next;
+    const Car* toDel = cur;
+    const cur = cur->next;
     delete toDel;
   }
   delete first;
