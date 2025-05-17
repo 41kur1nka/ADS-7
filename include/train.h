@@ -1,6 +1,6 @@
 // Copyright 2022 NNTU-CS
-#ifndef TRAIN_H
-#define TRAIN_H
+#ifndef INCLUDE_TRAIN_H_
+#define INCLUDE_TRAIN_H_
 
 #include <cstddef>
 
@@ -10,7 +10,7 @@ class Train {
     bool light;  // состояние лампочки
     Car* next;
     Car* prev;
-    Car(bool l) : light(l), next(this), prev(this) {}
+    explicit Car(bool l) : light(l), next(this), prev(this) {}
   };
 
   Car* first;           // указатель на точку входа
@@ -30,4 +30,4 @@ class Train {
   std::size_t getOpCount() const;
 };
 
-#endif  // TRAIN_H
+#endif  // INCLUDE_TRAIN_H_
