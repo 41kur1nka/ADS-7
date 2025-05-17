@@ -5,7 +5,7 @@ Train::Train() : first(nullptr), countOp(0) {}
 
 Train::~Train() {
   if (!first) return;
-  Car* cur = cur->next;
+  Car* cur = first->next;
   while (cur != first) {
     Car* toDel = cur;
     cur = cur->next;
