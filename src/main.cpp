@@ -1,5 +1,6 @@
 // Copyright 2022 NNTU-CS
 #include <chrono>
+#include <cstdint>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -11,7 +12,7 @@ using Clock = std::chrono::high_resolution_clock;
 enum InitMode { ALL_OFF, ALL_ON, RANDOM };
 
 void run_experiment(InitMode mode, const std::vector<int>& ns) {
-  std::mt19937_64 rnd{static_cast<unsigned long>(std::random_device{}())};
+  std::mt19937_64 rnd{static_cast<uint64_t>(std::random_device{}())};
   std::uniform_int_distribution<int> bit{0, 1};
 
   for (int n : ns) {
@@ -39,16 +40,19 @@ void run_experiment(InitMode mode, const std::vector<int>& ns) {
 
 int main() {
   std::vector<int> ns;
-  for (int n = 1000; n <= 10000; n += 1000) ns.push_back(n);
+  for (int n = 1000; n <= 10000; n += 1000) {
+    ns.push_back(n);
+  }
 
-  std::cout << "*** Experiment: all lights OFF ***\n";
+  std::cout << "*** ALL_OFF ***\n";
   run_experiment(ALL_OFF, ns);
 
-  std::cout << "\n*** Experiment: all lights ON ***\n";
+  std::cout << "\n*** ALL_ON ***\n";
   run_experiment(ALL_ON, ns);
 
-  std::cout << "\n*** Experiment: RANDOM ***\n";
+  std::cout << "\n*** RANDOM ***\n";
   run_experiment(RANDOM, ns);
 
   return 0;
 }
+
