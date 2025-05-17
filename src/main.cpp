@@ -12,7 +12,7 @@ using Clock = std::chrono::high_resolution_clock;
 enum InitMode { ALL_OFF, ALL_ON, RANDOM };
 
 void run_experiment(InitMode mode, const std::vector<int>& ns) {
-  std::mt19937_64 rnd{static_cast<uint64_t>(std::random_device{}())};
+  std::mt19937_64 rnd{static_cast<uint64_t>(std::random_device {}())};
   std::uniform_int_distribution<int> bit{0, 1};
 
   for (int n : ns) {
