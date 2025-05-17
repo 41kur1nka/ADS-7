@@ -7,8 +7,8 @@ Train::~Train() {
   if (!first) return;
   Car* cur = cur->next;
   while (cur != first) {
-    const Car* toDel = cur;
-    const cur = cur->next;
+    Car* toDel = cur;
+    cur = cur->next;
     delete toDel;
   }
   delete first;
@@ -43,7 +43,7 @@ std::size_t Train::getLength() {
 
   if (!hasOn) {
     first->light = !first->light;
-    Car* cur = first->next;
+    const Car* cur = first->next;
     ++countOp;
     std::size_t len = 1;
     while (cur != first) {
@@ -58,7 +58,7 @@ std::size_t Train::getLength() {
     first->light = !first->light;
     return len;
   } else {
-    Car* cur = first;
+    const Car* cur = first;
     std::size_t k = 0;
     while (true) {
       ++k;
