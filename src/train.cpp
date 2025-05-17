@@ -28,18 +28,52 @@ void Train::addCar(bool light) {
 }
 
 std::size_t Train::getLength() {
-  if (!first) return 0;
   countOp = 0;
+  if (!first) return 0;
 
-  std::size_t len = 1;
-  Car* cur = first->next;
-  ++countOp;
-  while (cur != first) {
-    ++len;
-    cur = cur->next;
+  const Car* p = first;
+  bool hasOn = false;
+  do {
+    if (p->light) {
+      hasOn = true;
+      break;
+    }
+    p = p->next;
+  } while (p != first);
+
+  if (!hasOn) {
+    first->light = !first->light;
+    Car* cur = first->next;
     ++countOp;
+    std::size_t len = 1;
+    while (cur != first) {
+      cur = cur->next;
+      ++countOp;
+      ++len;
+    }
+    for (std::size_t i = 0; i < len; ++i) {
+      cur = cur->prev;
+      ++countOp;
+    }
+    first->light = !first->light;
+    return len;
+  } else {
+    Car* cur = first;
+    std::size_t k = 0;
+    while (true) {
+      ++k;
+      for (std::size_t i = 0; i < k; ++i) {
+        cur = cur->next;
+        ++countOp;
+      }
+      for (std::size_t i = 0; i < k; ++i) {
+        cur = cur->prev;
+        ++countOp;
+      }
+      if (cur == first) return k;
+    }
   }
-  return len;
 }
 
 std::size_t Train::getOpCount() const { return countOp; }
+
